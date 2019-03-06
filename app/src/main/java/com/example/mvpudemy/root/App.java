@@ -2,6 +2,8 @@ package com.example.mvpudemy.root;
 
 import android.app.Application;
 
+import com.example.mvpudemy.login.LoginModule;
+
 /**
  * We need to define an application object where dagger will live throughout the entire life span of
  * the application.
@@ -21,6 +23,7 @@ public class App extends Application {
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
+                .loginModule(new LoginModule())
                 .build();
 
     }
