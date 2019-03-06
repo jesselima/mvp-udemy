@@ -1,4 +1,6 @@
-package com.example.mvpudemy;
+package com.example.mvpudemy.root;
+
+import com.example.mvpudemy.login.LoginActivity;
 
 import javax.inject.Singleton;
 

@@ -1,7 +1,10 @@
-package com.example.mvpudemy;
+package com.example.mvpudemy.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.mvpudemy.R;
+import com.example.mvpudemy.root.App;
 
 public class LoginActivity extends AppCompatActivity {
 

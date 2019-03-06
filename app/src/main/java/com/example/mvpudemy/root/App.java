@@ -1,4 +1,4 @@
-package com.example.mvpudemy;
+package com.example.mvpudemy.root;
 
 import android.app.Application;
 
