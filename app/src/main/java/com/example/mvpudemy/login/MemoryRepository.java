@@ -14,7 +14,8 @@ public class MemoryRepository implements LoginRepository {
         if (user == null) {
             User user = new User("Fox", "Mulder");
             user.setId(0);
-            return user;
+            this.user = user;
+            return this.user;
         }else {
             // If the user is not null we return the user that is saved in the instance
             return user;
