@@ -1,6 +1,7 @@
 package com.example.mvpudemy.root;
 
 import com.example.mvpudemy.login.LoginActivity;
+import com.example.mvpudemy.login.LoginModule;
 
 import javax.inject.Singleton;
 
@@ -19,7 +20,8 @@ import dagger.Component;
  * should be declared in this class with individual inject() methods.
  */
 @Singleton
-@Component(modules = ApplicationModule.class)
+@Component(modules = { ApplicationModule.class, LoginModule.class })
+
 public interface ApplicationComponent {
 
     void inject(LoginActivity target);

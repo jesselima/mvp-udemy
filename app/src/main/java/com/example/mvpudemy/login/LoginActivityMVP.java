@@ -30,7 +30,6 @@ public interface LoginActivityMVP {
 
         void getCurrentUser();
 
-
     }
 
     interface Model {
