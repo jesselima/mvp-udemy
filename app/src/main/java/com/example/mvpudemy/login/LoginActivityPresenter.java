@@ -1,7 +1,6 @@
 package com.example.mvpudemy.login;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 /**
  * the LoginActivityPresenter. It usually implements the LoginActivityMVP.Presenter interface

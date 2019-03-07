@@ -8,12 +8,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class PresenterTests {
 
-    // TODO 1: Setup required objects (they will be the mock objects)
+    // TODO - Just read comments below : Setup required objects (they will be the mock objects).
     /**
      * Notice that for the model and view we are using the interface rather than the concrete implementation;
      * except for the user and presenter. The reason for not using concrete implementations is pretty
@@ -46,24 +45,18 @@ public class PresenterTests {
         user = new User("Fox", "Mulder");
 
         // When somebody calls the repository with the getUser method, returns the user object defined above.
-        // TODO uncomment this line below to verify no interaction
-        // when(mockLoginModel.getUser()).thenReturn(user);
+        when(mockLoginModel.getUser()).thenReturn(user);
 
         // Mock object for the view.
         mockView = mock(LoginActivityMVP.View.class);
 
+        // The constructor of my presenter must receive a model as argument.
         presenter = new LoginActivityPresenter(mockLoginModel);
 
         presenter.setView(mockView);
 
     }
 
-
-    @Test
-    public void noInteractionWithView() {
-        presenter.getCurrentUser();
-        verifyZeroInteractions(mockView);
-    }
 
 
     @Test
@@ -159,5 +152,32 @@ public class PresenterTests {
     }
 
 
+    @Test
+    public void shouldShowInputErrorMessageWhenFieldsAreEmpty() {
 
+        when(mockView.getFirstName()).thenReturn("");
+        when(mockView.getLastName()).thenReturn((""));
+
+        when(mockLoginModel.getUser()).thenReturn(user);
+
+        presenter.loginButtonClicked();
+
+        verify(mockView, times(1)).showInputError();
+
+    }
+
+    @Test
+    public void shouldCallCreateUserAndShowUserSavedMessageWhenInputIsCorrect() {
+
+        when(mockView.getFirstName()).thenReturn("Jesse");
+        when(mockView.getLastName()).thenReturn(("Lima"));
+
+        when(mockLoginModel.getUser()).thenReturn(user);
+
+        presenter.loginButtonClicked();
+
+        verify(mockLoginModel, times(1)).createUser("Jesse", "Lima");
+        verify(mockView, times(1)).showUserSavedMessage();
+
+    }
 }
