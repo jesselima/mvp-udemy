@@ -2,6 +2,7 @@ package com.example.mvpudemy.root;
 
 import android.app.Application;
 
+import com.example.mvpudemy.movies.ApiModule;
 import com.example.mvpudemy.login.LoginModule;
 
 /**
@@ -24,6 +25,7 @@ public class App extends Application {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .loginModule(new LoginModule())
+                .apiModule(new ApiModule())
                 .build();
 
     }

@@ -2,15 +2,24 @@ package com.example.mvpudemy.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mvpudemy.BuildConfig;
 import com.example.mvpudemy.R;
+import com.example.mvpudemy.movies.models.Movie;
+import com.example.mvpudemy.movies.MovieAPI;
+import com.example.mvpudemy.movies.models.Result;
 import com.example.mvpudemy.root.App;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginActivityMVP.View {
 
@@ -19,6 +28,10 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
     // also make the dagger aware of it so that it can inject the presenter at run time.
     @Inject
     LoginActivityMVP.Presenter presenter;
+
+    // 1 - Inject the dependency of MovieAPI
+    @Inject
+    MovieAPI movieAPI;
 
     private EditText editTextFirstName;
     private EditText editTextLastName;
@@ -31,18 +44,34 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityMVP
 
         ((App) getApplication()).getApplicationComponent().inject(this);
 
+        Call<Movie> movieAPICall = movieAPI.getMovies(BuildConfig.API_KEY);
+        movieAPICall.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                List<Result> movieList = response.body().getResults();
+
+                for (Result result : movieList) {
+                    System.out.println(result.getTitle());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
         editTextFirstName   = findViewById(R.id.loginActivity_firstName_editText);
         editTextLastName    = findViewById(R.id.loginActivity_lastName_editText);
         buttonLogin         = findViewById(R.id.loginActivity_login_button);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // So in the onClick() method we need to call the presenter and inform it about the
-                // button tapped event by invoking “presenter.loginButtonClicked()” then on the
-                // onResume() method
-                presenter.loginButtonClicked();
-            }
+        buttonLogin.setOnClickListener(v -> {
+            // So in the onClick() method we need to call the presenter and inform it about the
+            // button tapped event by invoking “presenter.loginButtonClicked()” then on the
+            // onResume() method
+            presenter.loginButtonClicked();
         });
     }
 

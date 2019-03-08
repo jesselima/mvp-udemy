@@ -1,5 +1,7 @@
 package com.example.mvpudemy.root;
 
+import com.example.mvpudemy.MainActivity;
+import com.example.mvpudemy.movies.ApiModule;
 import com.example.mvpudemy.login.LoginActivity;
 import com.example.mvpudemy.login.LoginModule;
 
@@ -20,10 +22,11 @@ import dagger.Component;
  * should be declared in this class with individual inject() methods.
  */
 @Singleton
-@Component(modules = { ApplicationModule.class, LoginModule.class })
+@Component(modules = { ApplicationModule.class, LoginModule.class, ApiModule.class })
 
 public interface ApplicationComponent {
 
     void inject(LoginActivity target);
 
+    void inject(MainActivity mainActivity);
 }

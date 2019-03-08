@@ -1,4 +1,4 @@
-package com.example.mvpudemy.http;
+package com.example.mvpudemy.movies;
 
 
 /**
@@ -50,31 +50,31 @@ public final class ApiConfig {
     public static final String CHANGE_KEYS_NAME                 = "name";
     public static final String CHANGE_KEYS_NETWORK              = "network";
     public static final String CHANGE_KEYS_ORIGIN_COUNTRY       = "origin_country";
-    public static final String CHANGE_KEYS_ORIGINAL_NAME = "original_name";
-    public static final String CHANGE_KEYS_ORIGINAL_TITLE = "original_title";
-    public static final String CHANGE_KEYS_OVERVIEW = "overview";
-    public static final String CHANGE_KEYS_PARTS = "parts";
-    public static final String CHANGE_KEYS_PLACE_OF_BIRTH = "place_of_birth";
-    public static final String CHANGE_KEYS_PLOT_KEYWORDS = "plot_keywords";
-    public static final String CHANGE_KEYS_PRODUCTION_CODE = "production_code";
+    public static final String CHANGE_KEYS_ORIGINAL_NAME        = "original_name";
+    public static final String CHANGE_KEYS_ORIGINAL_TITLE       = "original_title";
+    public static final String CHANGE_KEYS_OVERVIEW             = "overview";
+    public static final String CHANGE_KEYS_PARTS                = "parts";
+    public static final String CHANGE_KEYS_PLACE_OF_BIRTH       = "place_of_birth";
+    public static final String CHANGE_KEYS_PLOT_KEYWORDS        = "plot_keywords";
+    public static final String CHANGE_KEYS_PRODUCTION_CODE      = "production_code";
     public static final String CHANGE_KEYS_PRODUCTION_COMPANIES = "production_companies";
     public static final String CHANGE_KEYS_PRODUCTION_COUNTRIES = "production_countries";
-    public static final String CHANGE_KEYS_RELEASES = "releases";
-    public static final String CHANGE_KEYS_REVENUE = "revenue";
-    public static final String CHANGE_KEYS_RUNTIME = "runtime";
-    public static final String CHANGE_KEYS_SEASON = "season";
-    public static final String CHANGE_KEYS_SEASON_NUMBER = "season_number";
-    public static final String CHANGE_KEYS_SEASON_REGULAR = "season_regular";
-    public static final String CHANGE_KEYS_SPOKEN_LANGUAGES = "spoken_languages;";
-    public static final String CHANGE_KEYS_STATUS = "status";
-    public static final String CHANGE_KEYS_TAGLINE = "tagline";
-    public static final String CHANGE_KEYS_TITLE = "title";
-    public static final String CHANGE_KEYS_TRANSLATIONS = "translations";
-    public static final String CHANGE_KEYS_TVDB_ID = "tvdb_id";
-    public static final String CHANGE_KEYS_TVRAGE_ID = "tvrage_id;";
-    public static final String CHANGE_KEYS_TYPE = "type";
-    public static final String CHANGE_KEYS_VIDEO = "video";
-    public static final String CHANGE_KEYS_VIDEOS           = "videos";
+    public static final String CHANGE_KEYS_RELEASES             = "releases";
+    public static final String CHANGE_KEYS_REVENUE              = "revenue";
+    public static final String CHANGE_KEYS_RUNTIME              = "runtime";
+    public static final String CHANGE_KEYS_SEASON               = "season";
+    public static final String CHANGE_KEYS_SEASON_NUMBER        = "season_number";
+    public static final String CHANGE_KEYS_SEASON_REGULAR       = "season_regular";
+    public static final String CHANGE_KEYS_SPOKEN_LANGUAGES     = "spoken_languages;";
+    public static final String CHANGE_KEYS_STATUS               = "status";
+    public static final String CHANGE_KEYS_TAGLINE              = "tagline";
+    public static final String CHANGE_KEYS_TITLE                = "title";
+    public static final String CHANGE_KEYS_TRANSLATIONS         = "translations";
+    public static final String CHANGE_KEYS_TVDB_ID              = "tvdb_id";
+    public static final String CHANGE_KEYS_TVRAGE_ID            = "tvrage_id;";
+    public static final String CHANGE_KEYS_TYPE                 = "type";
+    public static final String CHANGE_KEYS_VIDEO                = "video";
+    public static final String CHANGE_KEYS_VIDEOS               = "videos";
     // Available language codes according to API documentation follows the ISO_639_1 specification
     public static final String[] LANGUAGES = { "aa","ab","ae","af","ak","am","an","ar","as","av",
             "ay","az","ba","be","bg","bi","bm","bn","bo","br","bs","ca","ce","ch","cn","co","cr",
@@ -102,6 +102,7 @@ public final class ApiConfig {
     private static final String W1280   = "w1280";
     private static final String ORIGINAL = "original";
 
+    private static final String BASE_URL                = "https://api.themoviedb.org/3/";
     private static final String BASE_URL_V3_DISCOVER    = "https://api.themoviedb.org/3/discover/movie";
     private static final String BASE_URL_V3_DEFAULT     = "https://api.themoviedb.org/3/movie/";
     private static final String BASE_IMAGE_URL          = "http://image.tmdb.org/t/p/";
@@ -110,7 +111,11 @@ public final class ApiConfig {
     private static final String BASE_VIDEO_URL_YOUTUBE  = "https://www.youtube.com/watch?v=";
     private static final String BASE_URL_SEARCH         = "https://api.themoviedb.org/3/search/movie";
 
-    public static String getBaseMovieApiUrlV3() {
+    public static String getBaseApiUrl() {
+        return BASE_URL;
+    }
+
+    public static String getBaseMovieApiUrlDiscover() {
         return BASE_URL_V3_DISCOVER;
     }
 
