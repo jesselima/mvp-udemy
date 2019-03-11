@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 .flatMap((Func1<Result, Observable<String>>) result -> Observable.just(result.getOriginalTitle()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                // Applying filter operator
+                .filter(s -> s.startsWith("C"))
+                // /\/\/\/\
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(String s) {
                         Log.d("########", "#########");
+                        Log.d("####with", " filter for title starting with 'C' ");
                         Log.d("Emitted from Observer: ", s);
                     }
                 });
