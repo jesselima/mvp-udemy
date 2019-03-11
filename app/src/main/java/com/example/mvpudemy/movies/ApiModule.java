@@ -5,6 +5,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -40,6 +41,10 @@ public class ApiModule {
                 .client(okHttpClient)
                 // GsonConverterFactory will be responsible for deserialize the JSON data
                 .addConverterFactory(GsonConverterFactory.create())
+                // To wire up our RxJava extensions we use this method
+                // .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) which takes an RxJava
+                // Call Adapter Factory. This is needed for retrofit2 to know what our observable is.
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
 
@@ -51,7 +56,11 @@ public class ApiModule {
     @Provides
     public OkHttpClient provideClient() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        // We have changed the interceptor logging level to HEADERS from the original value of “BODY”.
+        // This change will log the request and response lines and their respective headers without
+        // the actual BODY.
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         // The return will be a OkHttp Client instance with a interceptor already added to the client.
         return  new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
