@@ -1,13 +1,13 @@
 package com.example.mvpudemy;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.mvpudemy.movies.ApiConfig;
-import com.example.mvpudemy.movies.models.Movie;
 import com.example.mvpudemy.movies.MovieAPI;
+import com.example.mvpudemy.movies.models.Movie;
 import com.example.mvpudemy.movies.models.Result;
 import com.example.mvpudemy.root.App;
 
@@ -20,7 +20,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -41,12 +40,14 @@ public class MainActivity extends AppCompatActivity {
         Call<Movie> movieAPICall = movieAPI.getMovies(BuildConfig.API_KEY);
         movieAPICall.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
+            public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {
 
-                List<Result> movieList = response.body().getResults();
-                for (Result result : movieList) {
-                    Log.d("========", "========");
-                    Log.d("Without Rx >>>: ", result.getOriginalTitle());
+                List<Result> movieList = response.body() != null ? response.body().getResults() : null;
+                if (movieList != null) {
+                    for (Result result : movieList) {
+                        Log.d("========", "========");
+                        Log.d("Without Rx >>>: ", result.getOriginalTitle());
+                    }
                 }
 
             }
